@@ -15,6 +15,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fce4ec 100%);
             min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .container {
@@ -25,7 +32,7 @@
 
         .navbar {
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 15px;
@@ -33,6 +40,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .navbar h1 {
@@ -41,6 +54,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-size: 28px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .nav-buttons {
@@ -57,10 +76,31 @@
             transition: all 0.3s;
             background: white;
             color: #666;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(33, 150, 243, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .nav-btn:hover {
             background: #f5f5f5;
+            transform: translateY(-2px);
         }
 
         .nav-btn.active {
@@ -75,6 +115,12 @@
             justify-content: center;
             min-height: 80vh;
             text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .beaker-icon {
@@ -86,8 +132,8 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         .home-screen h1 {
@@ -97,12 +143,25 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
+            animation: textShimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .home-screen h2 {
             font-size: 28px;
             color: #555;
             margin-bottom: 15px;
+            animation: slideUp 0.8s ease 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .home-screen p {
@@ -110,6 +169,7 @@
             color: #666;
             max-width: 600px;
             margin-bottom: 40px;
+            animation: slideUp 0.8s ease 0.5s both;
         }
 
         .start-btn {
@@ -122,11 +182,19 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            animation: slideUp 0.8s ease 0.7s both, glow 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(156, 39, 176, 0.5); }
         }
 
         .start-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.5);
         }
 
         .grid {
@@ -147,12 +215,41 @@
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: cardAppear 0.6s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        @keyframes cardAppear {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .card h2 {
             font-size: 32px;
             margin-bottom: 25px;
             color: #333;
+            position: relative;
+            display: inline-block;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, #2196F3, #9C27B0);
+            transition: width 0.5s ease;
+        }
+
+        .card:hover h2::after {
+            width: 100%;
         }
 
         .slider-container {
@@ -173,6 +270,11 @@
             background: linear-gradient(to right, #E91E63, #9C27B0, #2196F3);
             outline: none;
             -webkit-appearance: none;
+            transition: all 0.3s;
+        }
+
+        input[type="range"]:hover {
+            transform: scaleY(1.2);
         }
 
         input[type="range"]::-webkit-slider-thumb {
@@ -185,6 +287,12 @@
             cursor: pointer;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.5);
         }
 
         input[type="range"]::-moz-range-thumb {
@@ -195,6 +303,12 @@
             cursor: pointer;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.3);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.5);
         }
 
         .range-labels {
@@ -213,11 +327,17 @@
             font-size: 16px;
             margin-bottom: 30px;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
         select:focus {
             outline: none;
             border-color: #2196F3;
+            box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+        }
+
+        select:hover {
+            border-color: #9C27B0;
         }
 
         .glass-container {
@@ -242,6 +362,12 @@
             border-radius: 50% 50% 15px 15px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             overflow: hidden;
+            animation: glassShine 4s ease-in-out infinite;
+        }
+
+        @keyframes glassShine {
+            0%, 100% { box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 20px 60px rgba(33, 150, 243, 0.3); }
         }
 
         .liquid {
@@ -250,6 +376,12 @@
             width: 100%;
             height: 85%;
             transition: background-color 1s ease;
+            animation: liquidWave 3s ease-in-out infinite;
+        }
+
+        @keyframes liquidWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .bubble {
@@ -261,6 +393,12 @@
             height: 60px;
             background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
+            animation: bubbleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
         .bubble-small {
@@ -272,6 +410,7 @@
             height: 45px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
+            animation: bubbleFloat 3s ease-in-out infinite 0.5s;
         }
 
         .droplet {
@@ -282,11 +421,13 @@
             font-size: 48px;
             animation: drop 2s ease-out;
             display: none;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
 
         @keyframes drop {
-            0% { top: 80px; opacity: 1; }
-            100% { top: 200px; opacity: 0; }
+            0% { top: 80px; opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+            100% { top: 200px; opacity: 0; transform: translateX(-50%) scale(0.8); }
         }
 
         .droplet.active {
@@ -305,6 +446,12 @@
 
         .diffusion.active {
             transform: scale(2);
+            animation: diffusionPulse 2s ease-out;
+        }
+
+        @keyframes diffusionPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
         }
 
         .button-group {
@@ -321,6 +468,26 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
         }
 
         .btn-primary {
@@ -329,9 +496,13 @@
             box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(-1px);
         }
 
         .btn-primary:disabled {
@@ -348,6 +519,15 @@
 
         .btn-secondary:hover {
             background: #f5f5f5;
+            border-color: #9C27B0;
+            transform: translateY(-2px);
+        }
+
+        .ph-meter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
         }
 
         .ph-meter {
@@ -355,19 +535,47 @@
             border: 2px solid #2196F3;
             border-radius: 10px;
             padding: 20px;
-            margin-top: 25px;
+            transition: all 0.3s;
+        }
+
+        .ph-meter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(33, 150, 243, 0.3);
+        }
+
+        .ph-meter.solvent {
+            background: #f3e5f5;
+            border-color: #9C27B0;
+        }
+
+        .ph-meter.solvent:hover {
+            box-shadow: 0 5px 20px rgba(156, 39, 176, 0.3);
         }
 
         .ph-meter h3 {
             color: #1976D2;
             margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 16px;
+        }
+
+        .ph-meter.solvent h3 {
+            color: #7B1FA2;
         }
 
         .ph-value {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: bold;
             color: #2196F3;
+            animation: numberPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .ph-meter.solvent .ph-value {
+            color: #9C27B0;
         }
 
         .color-name {
@@ -376,12 +584,17 @@
             margin-top: 5px;
         }
 
+        .ph-meter.solvent .color-name {
+            color: #7B1FA2;
+        }
+
         .explanation-box {
             background: linear-gradient(to right, #e3f2fd, #f3e5f5);
             border: 2px solid #2196F3;
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 25px;
+            animation: fadeIn 0.5s ease;
         }
 
         .explanation-box p {
@@ -408,15 +621,35 @@
             border-bottom: 2px solid transparent;
             transition: all 0.3s;
             white-space: nowrap;
+            position: relative;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #2196F3;
+            transition: all 0.3s;
+            transform: translateX(-50%);
         }
 
         .tab:hover {
             color: #333;
         }
 
+        .tab:hover::after {
+            width: 80%;
+        }
+
         .tab.active {
             color: #2196F3;
-            border-bottom-color: #2196F3;
+        }
+
+        .tab.active::after {
+            width: 100%;
         }
 
         .tab-content {
@@ -425,11 +658,11 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: tabFadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -458,6 +691,13 @@
             font-family: 'Courier New', monospace;
             margin: 15px 0;
             overflow-x: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: codeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes codeGlow {
+            0%, 100% { box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 5px 20px rgba(78, 201, 176, 0.3); }
         }
 
         .formula-box {
@@ -466,6 +706,13 @@
             border-radius: 10px;
             font-family: 'Courier New', monospace;
             margin: 15px 0;
+            border-left: 4px solid #2196F3;
+            transition: all 0.3s;
+        }
+
+        .formula-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .collab-section {
@@ -474,6 +721,7 @@
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-top: 30px;
+            animation: cardAppear 0.8s ease;
         }
 
         .collab-grid {
@@ -487,6 +735,19 @@
             padding: 20px;
             border-radius: 10px;
             border: 2px solid;
+            transition: all 0.3s;
+            animation: cardBounce 0.6s ease;
+        }
+
+        @keyframes cardBounce {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .collab-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .collab-card.blue {
@@ -508,12 +769,28 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            animation: fadeIn 0.8s ease;
         }
 
         .data-table th, .data-table td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .data-table tbody tr {
+            animation: tableRowAppear 0.5s ease;
+        }
+
+        @keyframes tableRowAppear {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .data-table tbody tr:hover {
+            background: #f5f5f5;
+            transform: scale(1.01);
         }
 
         .data-table th {
@@ -527,6 +804,30 @@
             border-radius: 20px;
             color: white;
             font-weight: 600;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
+            box-shadow: 0 3px 10px rgba(244, 67, 54, 0.4);
         }
 
         .chart-bar {
@@ -534,6 +835,12 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
+            animation: chartBarAppear 0.8s ease;
+        }
+
+        @keyframes chartBarAppear {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .chart-label {
@@ -549,6 +856,7 @@
             border-radius: 20px;
             overflow: hidden;
             position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .chart-fill {
@@ -560,7 +868,25 @@
             padding-right: 12px;
             color: white;
             font-weight: bold;
-            transition: width 0.5s ease;
+            transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .chart-name {
@@ -570,6 +896,24 @@
 
         .hidden {
             display: none !important;
+        }
+
+        .clear-all-btn {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .clear-all-btn:hover {
+            background: #e64a19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
         }
     </style>
 </head>
@@ -604,16 +948,25 @@
         <!-- Simulation Page -->
         <div id="simulationPage" class="container hidden">
             <div class="grid">
-                <!-- Left Panel - Simulator -->
                 <div class="card">
                     <h2>Virtual Drink Simulator</h2>
                     
                     <div class="slider-container">
-                        <label class="slider-label">pH Level: <span id="phValue">6.8</span></label>
-                        <input type="range" id="phSlider" min="1" max="7" step="0.1" value="6.8">
+                        <label class="slider-label">Solute pH Level (Acid to Add): <span id="solutePHValue">2.0</span></label>
+                        <input type="range" id="solutePHSlider" min="1" max="4" step="0.1" value="2.0">
                         <div class="range-labels">
-                            <span>Acidic (1.0)</span>
+                            <span>Very Acidic (1.0)</span>
+                            <span>Moderately Acidic (4.0)</span>
+                        </div>
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">⚠️ Lower pH = More acidic = More pink when mixed!</p>
+                    </div>
+
+                    <div class="slider-container">
+                        <label class="slider-label">Solvent pH Level (Blue Base): <span id="solventPHValue">9.0</span></label>
+                        <input type="range" id="solventPHSlider" min="7" max="14" step="0.1" value="9.0">
+                        <div class="range-labels">
                             <span>Neutral (7.0)</span>
+                            <span>Strongly Basic (14.0)</span>
                         </div>
                     </div>
 
@@ -646,10 +999,23 @@
                         </button>
                     </div>
 
-                    <div class="ph-meter">
-                        <h3>⚡ pH Meter Reading</h3>
-                        <div class="ph-value" id="phDisplay">6.8</div>
-                        <div class="color-name">Current Color: <span id="colorName">Blue</span></div>
+                    <div class="ph-meter-grid">
+                        <div class="ph-meter">
+                            <h3>⚗️ Solute pH (Acid Shot)</h3>
+                            <div class="ph-value" id="solutePHDisplay">2.0</div>
+                            <div class="color-name">Activator to Add</div>
+                        </div>
+                        <div class="ph-meter solvent">
+                            <h3>🧪 Solvent pH (Blue Base)</h3>
+                            <div class="ph-value" id="solventPHDisplay">9.0</div>
+                            <div class="color-name">Your Blue Lemonade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ph-meter" style="margin-top: 15px;">
+                        <h3>📊 Current Solution pH</h3>
+                        <div class="ph-value" id="finalPHDisplay">9.0</div>
+                        <div class="color-name">Current Color: <span id="colorName">Deep Blue</span></div>
                     </div>
                 </div>
 
@@ -671,15 +1037,22 @@
                     <div id="chemistryTab" class="tab-content active">
                         <h3>Anthocyanin Chemistry</h3>
                         <p><strong>pH Scale:</strong> Measures hydrogen ion concentration from 0 (very acidic) to 14 (very basic)</p>
+                        <p><strong>How it works:</strong> Your blue lemonade starts in a basic state. When you add acidic solute, it shifts toward pink!</p>
                         <p><strong>Anthocyanins</strong> are flavonoid pigments that change structure based on pH:</p>
                         <ul>
-                            <li><strong>pH &lt; 4:</strong> Flavylium cation (red/pink) - fully protonated</li>
-                            <li><strong>pH 4-6:</strong> Quinoidal base (purple) - partially protonated</li>
-                            <li><strong>pH &gt; 6:</strong> Neutral form (blue) - deprotonated</li>
+                            <li><strong>pH &gt; 8 (Basic):</strong> Anionic form (deep blue) - In basic solutions like your blue lemonade, anthocyanins are deprotonated and appear blue</li>
+                            <li><strong>pH 6-8 (Near Neutral):</strong> Quinoidal base (blue) - Still mostly deprotonated</li>
+                            <li><strong>pH 4-6 (Slightly Acidic):</strong> Quinoidal/Flavylium equilibrium (purple) - Partial protonation creates purple transition</li>
+                            <li><strong>pH 2-4 (Acidic):</strong> Flavylium cation (pink) - When acid is added, protonation occurs</li>
+                            <li><strong>pH &lt; 2 (Very Acidic):</strong> Fully protonated flavylium (deep pink/red) - Maximum protonation</li>
                         </ul>
                         <div class="formula-box">
-                            <div>H⁺ + Anthocyanin ⇌ Anthocyanin-H⁺</div>
-                            <div style="color: #666; margin-top: 5px;">(Protonation causes color shift)</div>
+                            <div><strong>In Basic Solution (Blue Lemonade):</strong></div>
+                            <div>Anthocyanin⁻ (blue, anionic form)</div>
+                            <div style="margin-top: 10px;"><strong>Adding Acid (Activator Shot):</strong></div>
+                            <div>Anthocyanin⁻ + H⁺ → Anthocyanin (neutral)</div>
+                            <div>Anthocyanin + H⁺ → Anthocyanin-H⁺ (pink, cationic form)</div>
+                            <div style="color: #666; margin-top: 10px;">(More acid = More protonation = More pink!)</div>
                         </div>
                     </div>
 
@@ -720,8 +1093,8 @@ function getColor(pH) {
   }
 }
                         </div>
-                        <p><strong>Input:</strong> pH value, acid type</p>
-                        <p><strong>Process:</strong> State evaluation based on pH thresholds</p>
+                        <p><strong>Input:</strong> Solute pH, Solvent pH, acid type</p>
+                        <p><strong>Process:</strong> Calculate final pH and evaluate state based on thresholds</p>
                         <p><strong>Output:</strong> Color value and visual representation</p>
                         <p style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px;">
                             This demonstrates how scientific systems can be modeled computationally using conditional logic and state transitions.
@@ -739,15 +1112,15 @@ function getColor(pH) {
                 <div class="collab-grid">
                     <div class="collab-card blue">
                         <p style="font-weight: bold; color: #1976D2;">User 1</p>
-                        <p style="color: #2196F3; font-size: 14px;">Controls: pH Level</p>
+                        <p style="color: #2196F3; font-size: 14px;">Controls: Solute pH Level</p>
                     </div>
                     <div class="collab-card purple">
                         <p style="font-weight: bold; color: #7B1FA2;">User 2</p>
-                        <p style="color: #9C27B0; font-size: 14px;">Controls: Acid Type</p>
+                        <p style="color: #9C27B0; font-size: 14px;">Controls: Solvent pH Level</p>
                     </div>
                     <div class="collab-card pink">
                         <p style="font-weight: bold; color: #C2185B;">User 3</p>
-                        <p style="color: #E91E63; font-size: 14px;">Controls: Diffusion Speed</p>
+                        <p style="color: #E91E63; font-size: 14px;">Controls: Acid Type</p>
                     </div>
                 </div>
             </div>
@@ -763,24 +1136,28 @@ function getColor(pH) {
                     <thead>
                         <tr>
                             <th>Time</th>
-                            <th>pH Level</th>
+                            <th>Solute pH</th>
+                            <th>Solvent pH</th>
+                            <th>Final pH</th>
                             <th>Acid Type</th>
                             <th>Resulting Color</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="dataTableBody">
                         <tr>
-                            <td colspan="4" style="text-align: center; color: #999;">No experiments recorded yet. Run some simulations!</td>
+                            <td colspan="7" style="text-align: center; color: #999;">No experiments recorded yet. Run some simulations!</td>
                         </tr>
                     </tbody>
                 </table>
+                <button class="clear-all-btn" onclick="clearAllData()">🗑️ Clear All Data</button>
 
-                <h3 style="margin-top: 40px; margin-bottom: 20px;">Color Distribution by pH Range</h3>
+                <h3 style="margin-top: 40px; margin-bottom: 20px;">Color Distribution by Final pH Range</h3>
                 <div id="chartContainer">
                     <div class="chart-bar">
                         <div class="chart-label">pH &gt; 6.0</div>
                         <div class="chart-track">
-                            <div class="chart-fill" id="blueBar" style="width: 0%; background-color: #4A90E2;">0</div>
+                            <div class="chart-fill" id="blueBar" style="width: 0%; background-color: #1E88E5;">0</div>
                         </div>
                         <div class="chart-name">Blue</div>
                     </div>
@@ -792,11 +1169,18 @@ function getColor(pH) {
                         <div class="chart-name">Purple</div>
                     </div>
                     <div class="chart-bar">
-                        <div class="chart-label">pH ≤ 4.0</div>
+                        <div class="chart-label">2.0 &lt; pH ≤ 4.0</div>
                         <div class="chart-track">
                             <div class="chart-fill" id="pinkBar" style="width: 0%; background-color: #E91E63;">0</div>
                         </div>
                         <div class="chart-name">Pink</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">pH ≤ 2.0</div>
+                        <div class="chart-track">
+                            <div class="chart-fill" id="deepPinkBar" style="width: 0%; background-color: #D81B60;">0</div>
+                        </div>
+                        <div class="chart-name">Deep Pink</div>
                     </div>
                 </div>
             </div>
@@ -805,21 +1189,43 @@ function getColor(pH) {
 
     <script>
         let currentPage = 'home';
-        let pH = 6.8;
+        let solutePH = 2.0; // ACIDIC - what we're adding
+        let solventPH = 9.0; // BASIC - the blue lemonade
+        let displayPH = 9.0; // Start showing solvent pH (blue)
         let acidType = 'citric';
         let experimentData = [];
         let isAnimating = false;
+        let isMixed = false;
+
+        function calculateFinalPH() {
+            // Simplified pH calculation (assuming equal volumes and mixing)
+            // In reality, this would be more complex based on concentration and pKa values
+            finalPH = (solutePH + solventPH) / 2;
+            return finalPH;
+        }
 
         function getColor(ph) {
+            // Always return blue if not mixed yet (showing solvent)
+            if (!isMixed) {
+                return { hex: '#1E88E5', name: 'Deep Blue' };
+            }
+            
+            // After mixing, show actual pH-based color
+            if (ph > 8) return { hex: '#1E88E5', name: 'Deep Blue' };
             if (ph > 6) return { hex: '#4A90E2', name: 'Blue' };
+            if (ph > 5) return { hex: '#7B68EE', name: 'Blue-Purple' };
             if (ph > 4) return { hex: '#9B59B6', name: 'Purple' };
-            return { hex: '#E91E63', name: 'Pink' };
+            if (ph > 3) return { hex: '#C2185B', name: 'Pink-Purple' };
+            if (ph > 2) return { hex: '#E91E63', name: 'Pink' };
+            return { hex: '#D81B60', name: 'Deep Pink' };
         }
 
         function getExplanation(ph) {
-            if (ph > 6) return "Anthocyanins remain in their neutral quinoidal base form, appearing blue.";
-            if (ph > 4) return "Protonation begins to alter anthocyanin structure, shifting absorption wavelengths toward purple.";
-            return "High acidity stabilizes the flavylium cation, producing a pink color through resonance structures.";
+            if (ph > 8) return "In this basic environment (pH > 8), anthocyanins exist in their anionic quinoidal form, displaying a deep blue color. The hydroxide ions keep the molecules deprotonated.";
+            if (ph > 6) return "At pH 6-8, anthocyanins remain in their neutral quinoidal base form, appearing blue. The solution is near neutral to slightly basic.";
+            if (ph > 4) return "At pH 4-6, protonation begins to alter anthocyanin structure. The molecules shift between neutral and cationic forms, shifting absorption wavelengths toward purple.";
+            if (ph > 2) return "In this acidic environment (pH 2-4), increased protonation stabilizes the flavylium cation, producing pink color through resonance structures.";
+            return "In highly acidic conditions (pH < 2), anthocyanins are fully protonated as flavylium cations, displaying an intense deep pink to red color.";
         }
 
         function showPage(page) {
@@ -843,19 +1249,33 @@ function getColor(pH) {
         }
 
         function updateLiquidColor() {
-            const color = getColor(pH);
+            // BEFORE mixing: Always show BLUE (solvent is always blue/basic)
+            // AFTER mixing: Show the final color based on mixed pH
+            const color = getColor(displayPH);
             document.getElementById('liquid').style.backgroundColor = color.hex;
             document.getElementById('diffusion').style.background = `radial-gradient(circle, ${color.hex} 0%, transparent 70%)`;
-            document.getElementById('phValue').textContent = pH.toFixed(1);
-            document.getElementById('phDisplay').textContent = pH.toFixed(1);
+            
+            document.getElementById('solutePHValue').textContent = solutePH.toFixed(1);
+            document.getElementById('solutePHDisplay').textContent = solutePH.toFixed(1);
+            
+            document.getElementById('solventPHValue').textContent = solventPH.toFixed(1);
+            document.getElementById('solventPHDisplay').textContent = solventPH.toFixed(1);
+            
+            document.getElementById('finalPHDisplay').textContent = displayPH.toFixed(1);
             document.getElementById('colorName').textContent = color.name;
-            document.getElementById('explanation').textContent = getExplanation(pH);
+            
+            if (!isMixed) {
+                document.getElementById('explanation').textContent = "Your blue lemonade (basic solvent) is ready. The anthocyanins are in their deprotonated, anionic form, appearing blue. Add the acidic activator shot to protonate them and watch the color shift to pink!";
+            } else {
+                document.getElementById('explanation').textContent = getExplanation(displayPH);
+            }
         }
 
         function addActivator() {
             if (isAnimating) return;
             
             isAnimating = true;
+            isMixed = true;
             const droplet = document.getElementById('droplet');
             const diffusion = document.getElementById('diffusion');
             const btn = document.getElementById('activatorBtn');
@@ -863,14 +1283,23 @@ function getColor(pH) {
             btn.disabled = true;
             droplet.classList.add('active');
             
+            // Calculate the final pH after mixing
+            finalPH = calculateFinalPH();
+            
+            // Animate the color change
             setTimeout(() => {
                 diffusion.classList.add('active');
+                // Gradually transition to final color
+                displayPH = finalPH;
+                updateLiquidColor();
             }, 500);
 
-            const color = getColor(pH);
+            const color = getColor(finalPH);
             const newData = {
                 time: new Date().toLocaleTimeString(),
-                pH: pH,
+                solutePH: solutePH,
+                solventPH: solventPH,
+                finalPH: finalPH,
                 acidType: acidType,
                 color: color.name
             };
@@ -885,8 +1314,12 @@ function getColor(pH) {
         }
 
         function resetExperiment() {
-            pH = 6.8;
-            document.getElementById('phSlider').value = 6.8;
+            solutePH = 2.0;
+            solventPH = 9.0;
+            displayPH = 9.0; // Reset to solvent pH (blue)
+            isMixed = false;
+            document.getElementById('solutePHSlider').value = 2.0;
+            document.getElementById('solventPHSlider').value = 9.0;
             document.getElementById('acidType').value = 'citric';
             acidType = 'citric';
             updateLiquidColor();
@@ -905,25 +1338,41 @@ function getColor(pH) {
             document.getElementById(tabName + 'Tab').classList.add('active');
         }
 
+        function deleteData(index) {
+            experimentData.splice(index, 1);
+            updateDataDisplay();
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all experiment data?')) {
+                experimentData = [];
+                updateDataDisplay();
+            }
+        }
+
         function updateDataDisplay() {
             const tbody = document.getElementById('dataTableBody');
             
             if (experimentData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No experiments recorded yet. Run some simulations!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #999;">No experiments recorded yet. Run some simulations!</td></tr>';
             } else {
-                tbody.innerHTML = experimentData.map(data => `
+                tbody.innerHTML = experimentData.map((data, index) => `
                     <tr>
                         <td>${data.time}</td>
-                        <td>${data.pH.toFixed(1)}</td>
+                        <td>${data.solutePH.toFixed(1)}</td>
+                        <td>${data.solventPH.toFixed(1)}</td>
+                        <td><strong>${data.finalPH.toFixed(1)}</strong></td>
                         <td style="text-transform: capitalize;">${data.acidType}</td>
-                        <td><span class="color-badge" style="background-color: ${getColor(data.pH).hex};">${data.color}</span></td>
+                        <td><span class="color-badge" style="background-color: ${getColor(data.finalPH).hex};">${data.color}</span></td>
+                        <td><button class="delete-btn" onclick="deleteData(${index})">Delete</button></td>
                     </tr>
                 `).join('');
             }
 
-            const blueCount = experimentData.filter(d => d.pH > 6).length;
-            const purpleCount = experimentData.filter(d => d.pH > 4 && d.pH <= 6).length;
-            const pinkCount = experimentData.filter(d => d.pH <= 4).length;
+            const blueCount = experimentData.filter(d => d.finalPH > 6).length;
+            const purpleCount = experimentData.filter(d => d.finalPH > 4 && d.finalPH <= 6).length;
+            const pinkCount = experimentData.filter(d => d.finalPH > 2 && d.finalPH <= 4).length;
+            const deepPinkCount = experimentData.filter(d => d.finalPH <= 2).length;
             const total = experimentData.length || 1;
 
             document.getElementById('blueBar').style.width = `${(blueCount / total) * 100}%`;
@@ -934,11 +1383,24 @@ function getColor(pH) {
             
             document.getElementById('pinkBar').style.width = `${(pinkCount / total) * 100}%`;
             document.getElementById('pinkBar').textContent = pinkCount;
+            
+            document.getElementById('deepPinkBar').style.width = `${(deepPinkCount / total) * 100}%`;
+            document.getElementById('deepPinkBar').textContent = deepPinkCount;
         }
 
-        document.getElementById('phSlider').addEventListener('input', (e) => {
-            pH = parseFloat(e.target.value);
-            updateLiquidColor();
+        document.getElementById('solutePHSlider').addEventListener('input', (e) => {
+            solutePH = parseFloat(e.target.value);
+            // Only update the display numbers, DON'T change liquid color
+            document.getElementById('solutePHValue').textContent = solutePH.toFixed(1);
+            document.getElementById('solutePHDisplay').textContent = solutePH.toFixed(1);
+        });
+
+        document.getElementById('solventPHSlider').addEventListener('input', (e) => {
+            solventPH = parseFloat(e.target.value);
+            // DON'T change liquid color - it stays blue until acid is added!
+            // Only update the display numbers
+            document.getElementById('solventPHValue').textContent = solventPH.toFixed(1);
+            document.getElementById('solventPHDisplay').textContent = solventPH.toFixed(1);
         });
 
         document.getElementById('acidType').addEventListener('change', (e) => {
